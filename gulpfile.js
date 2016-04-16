@@ -14,6 +14,10 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('dist/css'));
 });
  
-gulp.task('sass:watch', function () {
+gulp.task('watch', function () {
   gulp.watch('src/**/*.scss', ['sass']);
+  gulp.watch('src/**/*.jade', ['jade']); 
 });
+
+
+gulp.task('default', ['jade','sass','watch']);
