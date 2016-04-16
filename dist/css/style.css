@@ -200,7 +200,7 @@ h1, h2 {
   border-radius: 50%;
   color: #fff;
   position: absolute;
-  bottom: 21px;
+  bottom: 20px;
   right: 15px;
   text-align: center;
   padding: 10px 0px;
@@ -215,7 +215,7 @@ h1, h2 {
     line-height: 44px; }
   .product-weight .product-weight-txt {
     font-size: 21px;
-    line-height: 18px; }
+    line-height: 16px; }
 
 /** styles for button buy **/
 .btn-buy {
