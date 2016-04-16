@@ -1,0 +1,51 @@
+- var productList = [{disabledClass:'',subtitle: "с фуа-гра",productInfo:"<strong>10</strong> порций <br> мышь в подарок",productWeight: "0,5",productFooterSelected:"Филе из цыплят с трюфелями в бульоне.",productFooterDisabled: "Печалька, с фуа-гра закончился." },{ disabledClass:'',subtitle: "с рыбой",productInfo: "<strong>40</strong> порций <br><strong>2</strong> мыши в подарок",productWeight: "2",productFooterSelected:"Головы щучьи с чесноком да свежайшая сёмгушка.",productFooterDisabled: "Печалька, с рыбой закончился."},{disabledClass:'product-disabled',subtitle: "с курой",productInfo: "<strong>100</strong> порций <br><strong>5</strong> мышей в подарок<br> заказчик доволен",productWeight: "5",productFooterSelected:"Филе из цыплят с трюфелями в бульоне.",productFooterDisabled: "Печалька, с курой закончился."}];
+
+mixin product-card(product)
+    div.product(class=product.disabledClass)
+      div.product-card
+        if product.disabledClass=="product-disabled"
+           svg.disable-layer(width="320" height="480")
+            use(xlink:href="#disable-pattern")         
+        svg(width="320" height="480")
+          use(xlink:href="#cat-pattern")
+        div.product-description
+          div.product-name Сказочное заморское яство
+          div.product-name.product-name-selected-hover Котэ не одобряет
+          h1.product-title Нямушка
+          h2.product-subtitle= product.subtitle
+          div.product-info !{product.productInfo}
+        div.product-weight
+          div.product-weight-number= product.productWeight
+          div.product-weight-txt кг
+      div.product-footer Чего сидишь? Порадуй котэ, 
+        a(href="javascript:void(0);").btn-buy купи.
+      div.product-footer.product-footer-selected= product.productFooterSelected
+      div.product-footer.product-footer-disabled= product.productFooterDisabled
+
+doctype html
+html
+  head
+    title Нямушка
+    link(rel="stylesheet" href="../css/reset.css")
+    link(rel="stylesheet", href="../css/style.css")
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1')
+  body
+    div.container
+      svg
+        defs 
+          clipPath#clipping
+            path(style="stroke-width:4;  fill:none;" d="M 2,42 L 42,2 h 270 c 5,0 6,5 6, 10  v 456 c 0,5 -5,10 -10,10 h -294  c -5,0 -10, -5 -10,-10 z")
+          symbol#cat-pattern
+            image(xlink:href="../images/cat.jpg" width="320" height="480" style="clip-path:url(#clipping);")
+            path.border-pattern( d="M308 476c4.41 0 8-3.59 8-8 V12c0-4.41-3.59-8-8-8H44.66L4 44.66 V468c0 4.41 3.59 8 8 8h296m0 4H12c-6.63 0-12-5.37-12-12 V43L43 0h265c6.63 0 12 5.37 12 12v456c0 6.63-5.37 12-12 12z" )
+          g#disable-pattern
+            path(style="fill:rgba(179, 179, 179, 0.5);" d="M 2,40 L 40,2 h 270 c 5,0 6,5 6, 10  v 456 c 0,5 -5,10 -10,10 h -294  c -5,0 -10, -5 -10,-10 z")
+           
+      div
+        header.header Ты сегодня покормил кота?
+        div.products
+          for product in productList
+            +product-card(product)
+script(src="../js/jquery-1.10.2.js")
+script(src="../js/script.js")
